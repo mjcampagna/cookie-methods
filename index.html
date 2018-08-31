@@ -9,5 +9,46 @@
 <body>
 	
 	<script src="./cookies.js"></script>
+	<script>
+
+	var cookiesAllowed = function() {
+		var cookiesAllowed = !!checkCookie('allowCookies');
+		if ( !cookiesAllowed ) {
+
+			// var parent = document.querySelector('.page__wrapper');
+			// var child = document.createElement('div');
+			// child.id = 'cookie-acceptance-notice';
+			// child.classList.add('cookie-acceptance-<?php echo __c('COOKIE_ACCEPTANCE_NOTICE_LOCATION'); ?>');
+
+			// child.innerHTML = '<div>' +
+			// 	'<?php echo Markdown::text(__t('COOKIE_ACCEPTANCE_NOTICE')); ?>' +
+			// '<button id="accept-cookies"><?php echo __t('COOKIE_ACCEPTANCE_LINK_TEXT'); ?></button>' +
+			// '</div>';
+
+			// var styleChild = function() {
+			// 	var main = document.querySelector('.main__column').getBoundingClientRect();
+			// 	child.style.width = main.width + 'px';
+			// 	child.style.left = main.x + 'px';
+			// };
+
+			// styleChild();
+			// parent.appendChild(child);
+
+			// document.getElementById('accept-cookies').addEventListener('click', function(e) {
+			// 	setCookie('allowCookies', 'yes', 365);
+			// 	document.getElementById('cookie-acceptance-notice').remove();
+			// });
+
+			// $(window).on("resize", jQuery.debounce( 250, false, function(event){
+			// 	styleChild();
+			// }));
+		
+		}
+	}
+
+	cookiesAllowed();
+
+	</script>
+
 </body>
 </html>
