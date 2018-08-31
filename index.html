@@ -4,45 +4,83 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Document</title>
+	<title>Cookie Methods Demo</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" />
+	<link rel="stylesheet" href="./style.css" />
 </head>
 <body>
 	
+	<p>This page demonstrates the setting and deleting of cookies. Open the browser's console.log to view methods' results.</p>
+	<hr />
+
+	<div id="cookie-jar"></div>
+
 	<script src="./cookies.js"></script>
 	<script>
 
+	handleAcceptCookies = function(e) {
+		console.log(
+			'Cookie Created:\n', 
+			setCookie('allowCookies', 'yes', 365)
+		);
+		e.target.removeEventListener( 'click', handleAcceptCookies );
+		cookiesAllowed();
+	}
+
+	handleRevokeCookies = function(e) {
+		console.log(
+			'Cookie Deleted:\n', 
+			deleteCookie('allowCookies')
+		);
+		e.target.removeEventListener( 'click', handleRevokeCookies );
+		cookiesAllowed();
+	}
+
+	var createNotice = function() {
+		var notice = document.createElement('div');
+
+		notice.id = 'notice';
+		notice.innerHTML = '<div>' + 
+			'<p>Accept cookies?</p>' + 
+			'<button id="accept">Accept Cookies</button>' + 
+		'</div>';
+
+		return notice;
+	}
+
+	var createAcceptance = function() {
+		var acceptance = document.createElement('div');
+
+		acceptance.id = 'acceptance';
+		acceptance.innerHTML = '<div>' + 
+			'<p>Cookies are accepted.</p>' + 
+			'<button id="revoke">Revoke Cookie Acceptance</button>' + 
+		'</div>';
+
+		return acceptance;
+	}
+
+	var attachAcceptanceEvents = function() {
+		document.getElementById('accept').addEventListener( 'click', handleAcceptCookies );
+	}
+
+	var attachRevocationEvents = function() {
+		document.getElementById('revoke').addEventListener( 'click', handleRevokeCookies );
+	}
+
 	var cookiesAllowed = function() {
+		document.getElementById('cookie-jar').innerHTML = '';
 		var cookiesAllowed = !!checkCookie('allowCookies');
 		if ( !cookiesAllowed ) {
 
-			// var parent = document.querySelector('.page__wrapper');
-			// var child = document.createElement('div');
-			// child.id = 'cookie-acceptance-notice';
-			// child.classList.add('cookie-acceptance-<?php echo __c('COOKIE_ACCEPTANCE_NOTICE_LOCATION'); ?>');
-
-			// child.innerHTML = '<div>' +
-			// 	'<?php echo Markdown::text(__t('COOKIE_ACCEPTANCE_NOTICE')); ?>' +
-			// '<button id="accept-cookies"><?php echo __t('COOKIE_ACCEPTANCE_LINK_TEXT'); ?></button>' +
-			// '</div>';
-
-			// var styleChild = function() {
-			// 	var main = document.querySelector('.main__column').getBoundingClientRect();
-			// 	child.style.width = main.width + 'px';
-			// 	child.style.left = main.x + 'px';
-			// };
-
-			// styleChild();
-			// parent.appendChild(child);
-
-			// document.getElementById('accept-cookies').addEventListener('click', function(e) {
-			// 	setCookie('allowCookies', 'yes', 365);
-			// 	document.getElementById('cookie-acceptance-notice').remove();
-			// });
-
-			// $(window).on("resize", jQuery.debounce( 250, false, function(event){
-			// 	styleChild();
-			// }));
+			document.getElementById('cookie-jar').appendChild( createNotice() );
+			attachAcceptanceEvents();
 		
+		} else {
+
+			document.getElementById('cookie-jar').appendChild( createAcceptance() );
+			attachRevocationEvents();
+
 		}
 	}
 
