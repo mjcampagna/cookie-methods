@@ -35,3 +35,7 @@ Checks whether a given cookie exists; returns the cookie if found, else returns 
 ```js
 checkCookie( 'allowCookies' );
 ```
+
+## Example
+
+Open the `index.html` file for a sample implementation.
