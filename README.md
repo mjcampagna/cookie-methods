@@ -1,4 +1,4 @@
-# Cookie Methdos
+# Cookie Methods
 
 A set of generic methods for getting and setting cookies.
 
